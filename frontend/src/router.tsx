@@ -1,13 +1,19 @@
 import { createBrowserRouter } from "react-router-dom";
 import { AppShell } from "./components/layout/AppShell";
 import { OverviewPage } from "./pages/OverviewPage";
+import { EnergyDataPage } from "./pages/EnergyDataPage";
 import { PlaceholderPage } from "./pages/PlaceholderPage";
 import { navigationFlat } from "./config/navigation";
 
-// Map all nav items → routes.
-// Overview uses the real page; the rest use PlaceholderPage for now.
-const otherRoutes = navigationFlat
-  .filter((item) => item.path !== "/")
+// Pages that have real implementations
+const realPages: Record<string, React.ReactNode> = {
+  "/": <OverviewPage />,
+  "/energy-data": <EnergyDataPage />,
+};
+
+// Map remaining nav items to placeholder pages
+const placeholderRoutes = navigationFlat
+  .filter((item) => !(item.path in realPages))
   .map((item) => ({
     path: item.path,
     element: (
@@ -22,7 +28,6 @@ const otherRoutes = navigationFlat
 
 function getDescription(path: string): string {
   const descriptions: Record<string, string> = {
-    "/energy-data": "upload, validate, and manage your energy records",
     "/consumption": "analyze historical consumption patterns",
     "/analytics": "compare periods, buildings, and categories",
     "/data-quality": "track completeness, duplicates, and invalid values",
@@ -54,7 +59,11 @@ export const router = createBrowserRouter([
         index: true,
         element: <OverviewPage />,
       },
-      ...otherRoutes,
+      {
+        path: "energy-data",
+        element: <EnergyDataPage />,
+      },
+      ...placeholderRoutes,
     ],
   },
 ]);
