@@ -5,6 +5,7 @@ import { EnergyDataPage } from "./pages/EnergyDataPage";
 import { AnomaliesPage } from "./pages/AnomaliesPage";
 import { ForecastingPage } from "./pages/ForecastingPage";
 import { OptimizationPage } from "./pages/OptimizationPage";
+import { SimulatorPage } from "./pages/SimulatorPage";
 import { PlaceholderPage } from "./pages/PlaceholderPage";
 import { navigationFlat } from "./config/navigation";
 
@@ -14,6 +15,7 @@ const realPages: Record<string, React.ReactNode> = {
   "/anomalies": <AnomaliesPage />,
   "/forecasting": <ForecastingPage />,
   "/optimization": <OptimizationPage />,
+  "/simulator": <SimulatorPage />,
 };
 
 const placeholderRoutes = navigationFlat
@@ -36,7 +38,6 @@ function getDescription(path: string): string {
     "/analytics": "compare periods, buildings, and categories",
     "/data-quality": "track completeness, duplicates, and invalid values",
     "/recommendations": "review AI-generated cost and carbon savings actions",
-    "/simulator": "test what-if scenarios for demand, tariff, and flexibility",
     "/scenarios": "create, save, and compare planning scenarios",
     "/goals": "set and track energy, cost, and carbon targets",
     "/cost": "manage tariffs and analyze your electricity spend",
@@ -61,6 +62,7 @@ export const router = createBrowserRouter([
       { path: "anomalies", element: <AnomaliesPage /> },
       { path: "forecasting", element: <ForecastingPage /> },
       { path: "optimization", element: <OptimizationPage /> },
+      { path: "simulator", element: <SimulatorPage /> },
       ...placeholderRoutes,
     ],
   },
