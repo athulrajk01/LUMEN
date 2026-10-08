@@ -4,18 +4,18 @@ import { OverviewPage } from "./pages/OverviewPage";
 import { EnergyDataPage } from "./pages/EnergyDataPage";
 import { AnomaliesPage } from "./pages/AnomaliesPage";
 import { ForecastingPage } from "./pages/ForecastingPage";
+import { OptimizationPage } from "./pages/OptimizationPage";
 import { PlaceholderPage } from "./pages/PlaceholderPage";
 import { navigationFlat } from "./config/navigation";
 
-// Pages that have real implementations
 const realPages: Record<string, React.ReactNode> = {
   "/": <OverviewPage />,
   "/energy-data": <EnergyDataPage />,
   "/anomalies": <AnomaliesPage />,
   "/forecasting": <ForecastingPage />,
+  "/optimization": <OptimizationPage />,
 };
 
-// Map remaining nav items to placeholder pages
 const placeholderRoutes = navigationFlat
   .filter((item) => !(item.path in realPages))
   .map((item) => ({
@@ -35,7 +35,6 @@ function getDescription(path: string): string {
     "/consumption": "analyze historical consumption patterns",
     "/analytics": "compare periods, buildings, and categories",
     "/data-quality": "track completeness, duplicates, and invalid values",
-    "/optimization": "run multi-objective optimization on your loads",
     "/recommendations": "review AI-generated cost and carbon savings actions",
     "/simulator": "test what-if scenarios for demand, tariff, and flexibility",
     "/scenarios": "create, save, and compare planning scenarios",
@@ -61,6 +60,7 @@ export const router = createBrowserRouter([
       { path: "energy-data", element: <EnergyDataPage /> },
       { path: "anomalies", element: <AnomaliesPage /> },
       { path: "forecasting", element: <ForecastingPage /> },
+      { path: "optimization", element: <OptimizationPage /> },
       ...placeholderRoutes,
     ],
   },
